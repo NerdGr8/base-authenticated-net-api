@@ -1,0 +1,43 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Serilog;
+using Serilog.Events;
+using Serilog.Sinks.Elasticsearch;
+
+namespace JK
+{
+    public class Program
+    {
+        public static readonly string AppName = "JK";
+        public static readonly string AspUrl = String.IsNullOrEmpty(Environment.GetEnvironmentVariable("ASPNETCORE_URLS")) ? "http://*:5000" : Environment.GetEnvironmentVariable("ASPNETCORE_URLS");
+        public static readonly string AspEnv = String.IsNullOrEmpty(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")) ? "Development" : Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+        public static void Main(string[] args)
+        {
+            CreateWebHostBuilder(args).Build().Run();
+        }
+
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+                .UseUrls(AspUrl)
+                .UseStartup<Startup>();
+        private static Serilog.ILogger CreateSerilogLogger(IConfiguration configuration)
+        {
+            return new LoggerConfiguration()
+                .Enrich.WithProperty("ApplicationContext", AppName)
+                .Enrich.FromLogContext()
+                .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(configuration["ElasticConfiguration:Uri"]))
+                {
+                    MinimumLogEventLevel = LogEventLevel.Information,
+                    AutoRegisterTemplate = true
+                })
+                .CreateLogger();
+        }
+    }
+}
