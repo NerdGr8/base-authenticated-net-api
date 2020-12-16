@@ -1,11 +1,13 @@
-### How to run this 
+### How to run use this  
 
-Update connection strings in the appSettings.json file. 
+Clone Repo
+Update connection strings in the appSettings.json file and Docker-Compose.yaml
 
-open folder in terminal.
+Open solution folder in terminal.
 Run the following commands:
 
 ``
-dotnet ef migrations add "Initial Create" 
+dotnet ef migrations add "Initial Create"
+
 dotnet ef database update
 ``
