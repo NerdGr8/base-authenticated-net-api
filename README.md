@@ -1,13 +1,17 @@
-### How to run use this  
+### How to run use this
 
-Clone Repo
-Update connection strings in the appSettings.json file and Docker-Compose.yaml
+Clone Repo Update connection strings in the appSettings.json file and Docker-Compose.yaml
 
-Open solution folder in terminal.
-Run the following commands:
+ 1. Open solution folder in terminal. 
+ 2. Run the following commands:
 
-``
-dotnet ef migrations add "Initial Create"
+```    dotnet ef migrations add "Initial Create" ```
 
-dotnet ef database update
-``
+```    dotnet ef database update ```
+
+## To Execute Container and Code
+
+1. Open solution folder in terminal. 
+2. Run the following commands:
+
+```    docker-compose up ```
