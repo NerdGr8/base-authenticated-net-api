@@ -5,7 +5,7 @@ services:
   backend-api:
     build: 
       context: src/backend
-    restart: always
+    # restart: always
     container_name: JK_Backend
     environment:
       - Postgres__ConnectionString=User ID=takbro;Password=Takbro101;Server=takbro.ci9q1fyeq0lm.us-east-2.rds.amazonaws.com;Port=5432;Database=takbro;Integrated Security=true;Pooling=true;
