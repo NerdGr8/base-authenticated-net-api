@@ -6,12 +6,12 @@ services:
     build: 
       context: src/backend
     # restart: always
-    container_name: JK_Backend
+    container_name: API_Backend
     environment:
-      - Postgres__ConnectionString=User ID=takbro;Password=Takbro101;Server=takbro.ci9q1fyeq0lm.us-east-2.rds.amazonaws.com;Port=5432;Database=takbro;Integrated Security=true;Pooling=true;
+      - Postgres__ConnectionString=User ID={user-id};Password={password};Server={connection-string};Port=5432;Database={database-name};Integrated Security=true;Pooling=true;
       - Authentication__ExpiresInMinutes=480
-      - Authentication__SecretKey=fgHssaGHGFHh47g344ryft6HGFH789khgfherzxcsdaiHH9384fkdfGFHFtkvjjhkgfSRHGFHGqw56yEFH
-      - Authentication__Issuer=http://flexi-clear.projects.machinekind.co:5000
+      - Authentication__SecretKey={auth-secret}
+      - Authentication__Issuer={issuer-url}
       - Logging__LogLevel__Default=Warning
       - ASPNETCORE_URLS=http://*:5000
       - AllowedHosts=*
