@@ -12,6 +12,7 @@ Clone Repo Update connection strings in the appSettings.json file and Docker-Com
 ## To Execute Container and Code
 
 1. Open solution folder in terminal. 
+2. Replace values in docker-compose yml file and update connection string values
 2. Run the following commands:
 
 ```    docker-compose up ```
